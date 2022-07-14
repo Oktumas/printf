@@ -1,27 +1,26 @@
-nclude "main.h"
+#include "main.h"
 
 /**
- * * put_string - specificer s
- * * @v: list of arguments
- * * Return: total characters printed
- * */
+* put_string - specificer s
+* @v: list of arguments
+* Return: total characters printed
+*/
 int put_string(va_list v)
 {
-		int i;
-			char *s;
+	int i;
+	char *s;
 
-				s = va_arg(v, char*);
+	s = va_arg(v, char*);
 
-					if (s == NULL)
-							{
-										s = "(null)";
-											}
+	if (s == NULL)
+	{
+		s = "(null)";
+	}
 
-						for (i = 0; s[i] != '\0'; i++)
-								{
-											_putchar(s[i]);
-												}
+	for (i = 0; s[i] != '\0'; i++)
+	{
+		_putchar(s[i]);
+	}
 
-							return (i);
+	return (i);
 }
-
