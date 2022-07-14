@@ -1,4 +1,4 @@
-IN_H
+#ifndef MAIN_H
 #define MAIN_H
 #include <stdarg.h>
 #ifndef TRUE
@@ -24,60 +24,60 @@ IN_H
 #define FMT_PREC_EMPTY(fmt_inf) (fmt_inf->is_precision_set && !fmt_inf->prec)
 
 /**
- *  * struct format_info - Contains information about the options
- *   * \ and flags appearing in an instance of the conversion specifier
- *    * @prec: The specified precision
- *     * @width: The length of the formatted data
- *      * @spec: The specified conversion specifier character
- *       * @is_long_double: Specifies the presence of the 'L' length modifier
- *        * @is_long_long: Specifies the presence of the 'll' length modifier
- *         * @is_long: Specifies the presence of the 'l' length modifier
- *          * @is_short: Specifies the presence of the 'h' length modifier
- *           * @is_char: Specifies the presence of the 'hh' length modifier
- *            * @is_precision_set: Specifies the presence of a precision value
- *             * @is_width_set: Specifies the presence of a width value
- *              * @alt: Specifies the presence of the '#' flag
- *               * @space: Specifies the presence of the ' ' (invisible plus sign) flag
- *                * @left: Specifies the presence of the '-' (left-align) flag
- *                 * @show_sign: Specifies the presence of the '+' flag
- *                  * @group: The current locale's digit separator for integers
- *                   * @pad: This is the character to use for padding the output
- *                    */
+ * struct format_info - Contains information about the options
+ * \ and flags appearing in an instance of the conversion specifier
+ * @prec: The specified precision
+ * @width: The length of the formatted data
+ * @spec: The specified conversion specifier character
+ * @is_long_double: Specifies the presence of the 'L' length modifier
+ * @is_long_long: Specifies the presence of the 'll' length modifier
+ * @is_long: Specifies the presence of the 'l' length modifier
+ * @is_short: Specifies the presence of the 'h' length modifier
+ * @is_char: Specifies the presence of the 'hh' length modifier
+ * @is_precision_set: Specifies the presence of a precision value
+ * @is_width_set: Specifies the presence of a width value
+ * @alt: Specifies the presence of the '#' flag
+ * @space: Specifies the presence of the ' ' (invisible plus sign) flag
+ * @left: Specifies the presence of the '-' (left-align) flag
+ * @show_sign: Specifies the presence of the '+' flag
+ * @group: The current locale's digit separator for integers
+ * @pad: This is the character to use for padding the output
+ */
 struct format_info
 {
-		int prec;
-			int width;
-				char spec;
-					char is_long_double;
-						char is_long;
-							char is_long_long;
-								char is_short;
-									char is_char;
-										char is_precision_set;
-											char is_width_set;
-												char alt;
-													char space;
-														char left;
-															char show_sign;
-																char group;
-																	char pad;
+	int prec;
+	int width;
+	char spec;
+	char is_long_double;
+	char is_long;
+	char is_long_long;
+	char is_short;
+	char is_char;
+	char is_precision_set;
+	char is_width_set;
+	char alt;
+	char space;
+	char left;
+	char show_sign;
+	char group;
+	char pad;
 };
 typedef struct format_info fmt_info_t;
 /**
- *  * struct spec_printer - Represents a function that prints an argument
- *   * \ based on a determined format
- *    * @spec: The conversion specifier
- *     * @print_arg: The pointer to the printing function
- *      */
+ * struct spec_printer - Represents a function that prints an argument
+ * \ based on a determined format
+ * @spec: The conversion specifier
+ * @print_arg: The pointer to the printing function
+ */
 struct spec_printer
 {
-		char spec;
-			void (*print_arg)(va_list *args, fmt_info_t *fmt_info);
+	char spec;
+	void (*print_arg)(va_list *args, fmt_info_t *fmt_info);
 };
 struct convert
 {
-		char *sym;
-			int (*f)(va_list);
+	char *sym;
+	int (*f)(va_list);
 };
 typedef struct convert conver_t;
 typedef struct spec_printer spec_printer_t;
@@ -85,16 +85,16 @@ typedef unsigned char uchar_t;
 typedef unsigned short ushort_t;
 
 /**
- *  * struct float_info - Represents the IEE754 specification of a float
- *   * @sign: The sign of the float
- *    * @exponent: The exponent of the float
- *     * @mantissa: The mantissa of the float
- *      */
+ * struct float_info - Represents the IEE754 specification of a float
+ * @sign: The sign of the float
+ * @exponent: The exponent of the float
+ * @mantissa: The mantissa of the float
+ */
 struct float_info
 {
-		char sign;
-			char *exponent;
-				char *mantissa;
+	char sign;
+	char *exponent;
+	char *mantissa;
 };
 typedef struct float_info float_info_t;
 
@@ -123,7 +123,7 @@ int set_number(const char *str, int *number);
 void set_length(char cur, int *pos, fmt_info_t *fmt_info);
 int set_flags(const char *str, fmt_info_t *fmt_info);
 void set_precision(const char *str, va_list args,
-			fmt_info_t *fmt_info, int *i, int *error_status);
+	fmt_info_t *fmt_info, int *i, int *error_status);
 int read_format_info(const char *, va_list, fmt_info_t *, int *);
 
 
@@ -191,7 +191,7 @@ char *ptr_to_str(void *ptr);
 char *is_invalid(float_info_t *flt_info);
 
 void set_float_parts(double num,	uchar_t exponent_size,
-			uchar_t mantissa_size, float_info_t *float_info);
+	uchar_t mantissa_size, float_info_t *float_info);
 char *mantissa_to_dec_fraction(char *mantissa, unsigned short frac_len);
 char *float_to_str(float_info_t *flt_info, char can_free);
 
@@ -202,5 +202,4 @@ char is_specifier(char c);
 char is_flag(char c);
 char is_length(char c);
 #endif
-
 
